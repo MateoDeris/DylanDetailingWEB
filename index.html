@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dylan Detail</title>
+<meta name="description" content="Lavação técnica, correção de pintura e higienização premium para o seu veículo. Cada detalhe faz a diferença.">
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Sora:wght@300;400;500&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ============ TOKENS ============ */
+  :root{
+    --bg: #050505;
+    --bg-elevated: #0d0d0e;
+    --panel: rgba(255,255,255,0.04);
+    --panel-border: rgba(255,255,255,0.08);
+    --text: #f5f4f1;
+    --text-dim: #9c9a94;
+    --text-faint: #605e59;
+
+    --gold: #cda45e;
+    --gold-light: #ecd6a6;
+    --blue: #3b7dfb;
+
+    --chrome: linear-gradient(100deg, var(--gold), var(--gold-light), var(--blue), var(--gold-light), var(--gold));
+
+    --radius-lg: 22px;
+    --radius-md: 14px;
+    --radius-sm: 9px;
+
+    --ease: cubic-bezier(.16,.84,.44,1);
+    --dur: .7s;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *,*::before,*::after{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Manrope', sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+    width:100%;
+  }
+
+  img{display:block; max-width:100%;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  button{font-family:inherit; cursor:pointer; border:none; background:none; color:inherit;}
+  section{position:relative; padding:110px 8vw;}
+  @media (max-width:780px){ section{padding:72px 6vw;} }
+  @media (max-width:480px){ section{padding:60px 5.5vw;} }
+
+  ::selection{ background:var(--gold); color:#0a0a0a; }
+
+  :focus-visible{
+    outline:2px solid var(--gold);
+    outline-offset:3px;
+    border-radius:4px;
+  }
+
+  .section-media{ overflow:hidden; }
+  .section-media__bg{
+    position:absolute; inset:0;
+    background-size:cover;
+    background-position:center;
+    opacity:.24;
+    z-index:0;
+  }
+  .section-media__video{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    z-index:0;
+  }
+  .section-media__overlay{
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, var(--bg) 0%, rgba(8,9,11,.86) 14%, rgba(8,9,11,.86) 86%, var(--bg) 100%);
+    z-index:0;
+  }
+  .section-media__content{ position:relative; z-index:1; }
+
+  #trabalhos.section-media{ padding:0; min-height:70vh; }
+  #trabalhos .section-media__overlay{
+    background:linear-gradient(180deg, var(--bg) 0%, rgba(8,9,11,.35) 14%, rgba(8,9,11,.35) 86%, var(--bg) 100%);
+  }
+
+  @keyframes blink{
+    0%,100%{ opacity:1; }
+    50%{ opacity:.22; }
+  }
+  @keyframes bluePulseSoft{
+    0%,100%{ box-shadow:0 0 0 rgba(59,125,251,0); border-color:rgba(59,125,251,.35); }
+    50%{ box-shadow:0 0 16px 2px rgba(59,125,251,.45); border-color:rgba(59,125,251,.85); }
+  }
+  @keyframes btnGlowSlow{
+    0%,100%{ box-shadow:0 0 0 rgba(255,59,59,0); }
+    8%{ box-shadow:0 0 24px 5px rgba(255,59,59,.6); }
+    16%{ box-shadow:0 0 0 rgba(255,59,59,0); }
+    33%{ box-shadow:0 0 0 rgba(59,255,140,0); }
+    41%{ box-shadow:0 0 24px 5px rgba(59,255,140,.6); }
+    49%{ box-shadow:0 0 0 rgba(59,255,140,0); }
+    66%{ box-shadow:0 0 0 rgba(59,125,251,0); }
+    74%{ box-shadow:0 0 24px 5px rgba(59,125,251,.6); }
+    82%{ box-shadow:0 0 0 rgba(59,125,251,0); }
+  }
+
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:.72rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:#a9c6ff;
+    margin-bottom:18px;
+    padding:6px 14px;
+    border:1px solid rgba(59,125,251,.4);
+    border-radius:8px;
+    background:rgba(59,125,251,.06);
+    animation: bluePulseSoft 2.6s ease-in-out infinite;
+  }
+
+  .chrome-text{
+    background:var(--chrome);
+    background-size:250% 100%;
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+    color:transparent;
+    animation:sweep 6s linear infinite, blink 2.2s steps(2, jump-none) infinite;
+  }
+  @keyframes sweep{
+    0%{background-position:0% 50%;}
+    100%{background-position:250% 50%;}
+  }
+
+  h1,h2,h3{
+    font-family:'Syne', sans-serif;
+    font-weight:800;
+    letter-spacing:-.01em;
+    line-height:1.06;
+  }
+
+  .section-head{ max-width:640px; margin-bottom:52px; }
+  .section-head h2{ font-size:clamp(1.8rem, 3.4vw, 2.8rem); }
+  .section-head p{ color:var(--text-dim); margin-top:14px; font-size:1.02rem; max-width:520px; }
+
+  .glass{
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+  }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:15px 28px;
+    border-radius:100px;
+    font-weight:700;
+    font-size:.95rem;
+    white-space:nowrap;
+    transition:transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s;
+    animation: btnGlowSlow 7s ease-in-out infinite;
+  }
+  .btn-primary{
+    background:#fff;
+    color:#0a0a0a;
+  }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 12px 30px -8px rgba(205,164,94,.5); }
+  .btn-ghost{
+    border:1px solid var(--panel-border);
+    color:var(--text);
+  }
+  .btn-ghost:hover{ border-color:rgba(255,255,255,.32); transform:translateY(-2px); }
+
+  .icon-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    border:1px solid var(--panel-border);
+    color:var(--text);
+    flex-shrink:0;
+    transition:transform .35s var(--ease), border-color .35s, background .35s;
+  }
+  .icon-btn svg{ width:19px; height:19px; }
+  .icon-btn:hover{
+    border-color:rgba(255,255,255,.32);
+    transform:translateY(-2px);
+    background:rgba(255,255,255,.05);
+  }
+
+  .reveal{ opacity:0; transform:translateY(26px); transition:opacity .8s var(--ease), transform .8s var(--ease); }
+  .reveal.in-view{ opacity:1; transform:translateY(0); }
+
+  .lang-switch{ display:flex; align-items:center; gap:4px; padding:4px; border-radius:100px; }
+  .lang-btn{
+    display:flex; align-items:center; justify-content:center;
+    width:34px; height:34px; border-radius:50%;
+    font-size:1.05rem;
+    opacity:.5;
+    transition:opacity .3s, background .3s, transform .3s;
+  }
+  .lang-btn:hover{ opacity:.85; transform:translateY(-1px); }
+  .lang-btn.active{ opacity:1; background:rgba(255,255,255,.08); }
+
+  .nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 6vw;
+    background:#050505;
+    border-bottom:1px solid transparent;
+    transition:padding .4s var(--ease), border-color .4s var(--ease), box-shadow .4s var(--ease);
+  }
+  .nav.scrolled{
+    padding:14px 6vw;
+    border-bottom:1px solid var(--panel-border);
+    box-shadow:0 10px 30px -14px rgba(0,0,0,.7);
+  }
+  .nav__logo img{ height:52px; width:auto; }
+  .nav__links{ display:flex; align-items:center; }
+  .nav__links-inner{ display:flex; flex-direction:row; align-items:center; gap:34px; }
+  .nav__links a{
+    font-size:.92rem; font-weight:600; color:var(--text-dim);
+    position:relative; transition:color .3s;
+  }
+  .nav__links a::after{
+    content:''; position:absolute; left:0; bottom:-6px; width:0; height:1.5px;
+    background:var(--chrome); background-size:200% 100%;
+    transition:width .35s var(--ease);
+  }
+  .nav__links a:hover{ color:var(--text); }
+  .nav__links a:hover::after{ width:100%; animation:sweep 2.5s linear infinite; }
+
+  .nav__right{ display:flex; align-items:center; gap:14px; }
+  .nav__cta{ display:flex; align-items:center; gap:18px; }
+  .nav__burger{ display:none; width:26px; height:20px; position:relative; z-index:101; }
+  .nav__burger span{
+    position:absolute; left:0; width:100%; height:2px; background:var(--text);
+    transition:transform .35s var(--ease), opacity .35s var(--ease);
+  }
+  .nav__burger span:nth-child(1){ top:0; }
+  .nav__burger span:nth-child(2){ top:9px; }
+  .nav__burger span:nth-child(3){ top:18px; }
+  .nav__burger.open span:nth-child(1){ transform:translateY(9px) rotate(45deg); }
+  .nav__burger.open span:nth-child(2){ opacity:0; }
+  .nav__burger.open span:nth-child(3){ transform:translateY(-9px) rotate(-45deg); }
+
+  .nav__links .lang-switch--mobile{ display:none; }
+  .nav__reviews-mobile{ display:none; }
+  @keyframes navReviewGlow{
+    0%,100%{ box-shadow:0 0 0 rgba(205,164,94,0); }
+    50%{ box-shadow:0 0 16px rgba(205,164,94,.42); }
+  }
+
+  @media (max-width:900px){
+    .nav__links{
+      position:absolute; top:calc(100% + 10px); right:0; width:min(70vw,270px); height:auto;
+      background:rgba(5,5,5,.98); backdrop-filter:blur(20px);
+      flex-direction:column; justify-content:flex-start;
+      transform:translateY(-10px) scale(.98); transform-origin:top right;
+      opacity:0; pointer-events:none;
+      transition:transform .35s var(--ease), opacity .35s var(--ease);
+      border:1px solid var(--panel-border); border-radius:12px;
+      box-shadow:0 18px 42px rgba(0,0,0,.55);
+      overflow-x:hidden; overflow-y:auto;
+      max-height:calc(100svh - 96px);
+      overscroll-behavior:contain;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:thin;
+      scrollbar-color:rgba(205,164,94,.45) transparent;
+      padding:14px 18px 18px 22px;
+      touch-action:pan-y;
+    }
+    .nav__links::-webkit-scrollbar{ width:5px; }
+    .nav__links::-webkit-scrollbar-track{ background:transparent; }
+    .nav__links::-webkit-scrollbar-thumb{ background:rgba(205,164,94,.45); border-radius:10px; }
+    .nav__links::before{
+      content:''; position:absolute; top:0; left:0; width:3px; height:100%;
+      background:var(--chrome); background-size:100% 400%;
+      animation:sweepVertical 4s linear infinite;
+    }
+    @keyframes sweepVertical{ 0%{background-position:0 0;} 100%{background-position:0 400%;} }
+    .nav__links.open{ transform:translateY(0) scale(1); opacity:1; pointer-events:auto; }
+    .nav__links-inner{ width:100%; flex-direction:column; align-items:stretch; gap:2px; }
+    .nav__links li{ width:100%; }
+    .nav__links a{ display:flex; align-items:center; min-height:52px; padding:12px 8px; font-size:1rem; }
+    .nav__links a::after{ left:8px; bottom:1px; }
+    .nav__reviews-mobile{ display:block; margin-top:6px; padding-top:7px; border-top:1px solid var(--panel-border); }
+    .nav__reviews-mobile a{
+      color:var(--gold-light);
+      background:rgba(205,164,94,.1);
+      border:1px solid rgba(205,164,94,.5);
+      border-radius:8px;
+      animation:navReviewGlow 2.2s ease-in-out infinite;
+    }
+    .nav__links .lang-switch--mobile{ display:none; }
+    .nav__burger{ display:block; }
+    .nav__cta .btn-ghost{ display:none; }
+    .nav__cta .icon-btn{ display:none; }
+    .lang-switch--desktop{ gap:2px; padding:3px; }
+    .lang-switch--desktop .lang-btn{ width:30px; height:30px; font-size:.95rem; }
+  }
+
+  .hero{
+    min-height:100svh;
+    display:flex; flex-direction:column; align-items:flex-start; justify-content:center;
+    padding:0 8vw;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero__bg{
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(180deg, rgba(8,9,11,.32) 0%, rgba(8,9,11,.7) 65%, var(--bg) 100%),
+      url('img/fondohero.png');
+    background-size:cover;
+    background-position:center 30%;
+    z-index:0;
+  }
+  @media (max-width:780px){
+    .hero{ min-height:88svh; }
+    .hero__bg{
+      background-size:auto 90%;
+      background-position:center 20%;
+      background-repeat:no-repeat;
+    }
+  }
+  @media (max-width:480px){
+    .hero{ min-height:78svh; }
+  }
+
+  .hero__content{ position:relative; z-index:2; max-width:800px; padding:140px 0 100px; }
+  .hero h1{
+    font-family:'Fraunces', serif;
+    font-optical-sizing:auto;
+    font-weight:600;
+    font-size:clamp(2.5rem, 5.8vw, 4.4rem);
+    line-height:1.1;
+    letter-spacing:-.01em;
+    margin-bottom:24px;
+  }
+  .hero p{
+    font-family:'Sora', sans-serif;
+    font-weight:300;
+    font-size:clamp(1.02rem, 1.6vw, 1.2rem);
+    color:var(--text-dim);
+    max-width:520px;
+    margin-bottom:34px;
+  }
+
+  .carousel{ position:relative; }
+  .carousel__viewport{
+    overflow:hidden;
+    border-radius:var(--radius-lg);
+    cursor:grab;
+  }
+  .carousel__viewport.dragging{ cursor:grabbing; }
+  .carousel__track{
+    display:flex;
+    transition:transform .6s var(--ease);
+    will-change:transform;
+  }
+  .carousel__slide{
+    flex:0 0 100%;
+    aspect-ratio:16/9;
+    position:relative;
+  }
+  .carousel__slide img{
+    width:100%; height:100%; object-fit:cover;
+    user-select:none; -webkit-user-drag:none;
+  }
+  .carousel__slide::after{
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(180deg, transparent 45%, rgba(0,0,0,.65));
+    pointer-events:none;
+  }
+  .carousel__caption{
+    position:absolute; left:0; right:0; bottom:0; z-index:2;
+    padding:26px 28px;
+  }
+  .carousel__caption .eyebrow{ margin-bottom:8px; }
+  .carousel__caption h3{ font-size:1.25rem; margin-bottom:6px; }
+  .carousel__caption p{ color:var(--text-dim); font-size:.92rem; max-width:440px; }
+  @media (min-width:781px){
+    .carousel__slide{ flex-basis:64%; }
+    .carousel__slide + .carousel__slide{ margin-left:20px; }
+    .carousel__track{ gap:0; }
+  }
+
+  .carousel__controls{
+    display:flex; align-items:center; justify-content:space-between;
+    margin-top:26px;
+    flex-wrap:wrap;
+    gap:16px;
+  }
+  .carousel__arrows{ display:flex; gap:10px; }
+  .carousel__arrow{
+    width:46px; height:46px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    transition:border-color .3s, transform .3s;
+  }
+  .carousel__arrow:hover{ border-color:rgba(255,255,255,.35); transform:translateY(-2px); }
+  .carousel__arrow svg{ width:18px; height:18px; stroke:var(--text); }
+
+  .carousel__dots{ display:flex; gap:8px; flex-wrap:wrap; }
+  .carousel__dot{
+    width:8px; height:8px; border-radius:50%;
+    background:var(--panel-border);
+    transition:background .3s, width .3s;
+  }
+  .carousel__dot.active{
+    width:26px; border-radius:5px;
+    background:var(--chrome); background-size:200% 100%;
+  }
+
+  .why{
+    display:grid; grid-template-columns:1.1fr .9fr; gap:70px; align-items:center;
+  }
+  @media (max-width:900px){ .why{ grid-template-columns:1fr; gap:40px; } }
+  .why h2{ font-size:clamp(1.7rem,3.2vw,2.5rem); margin-bottom:22px; }
+  .why p{ color:var(--text-dim); font-size:1.02rem; margin-bottom:16px; max-width:520px; }
+  .why__panel{
+    border-radius:var(--radius-lg);
+    padding:44px 36px;
+    position:relative;
+    overflow:hidden;
+  }
+  .why__panel::before{
+    content:''; position:absolute; inset:-2px; z-index:-1;
+    background:var(--chrome); background-size:220% 100%;
+    animation:sweep 8s linear infinite, blink 2.6s steps(2, jump-none) infinite;
+    opacity:.5; filter:blur(30px);
+  }
+  .why__quote{ font-family:'Syne', sans-serif; font-weight:700; font-size:1.35rem; line-height:1.4; }
+
+  .cta{
+    text-align:center;
+    padding:120px 8vw;
+    position:relative;
+  }
+  .cta__inner{ position:relative; z-index:1; max-width:640px; margin:0 auto; }
+  .cta h2{ font-size:clamp(2rem,4.4vw,3.4rem); margin-bottom:26px; }
+  .cta p{ color:var(--text-dim); margin-bottom:38px; font-size:1.05rem; }
+  .cta__blob{
+    position:absolute; left:50%; top:50%; width:600px; height:300px;
+    transform:translate(-50%,-50%);
+    background:radial-gradient(ellipse, rgba(205,164,94,.18), transparent 70%);
+    filter:blur(40px); z-index:0;
+  }
+
+  footer{
+    padding:44px 8vw;
+    border-top:1px solid var(--panel-border);
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;
+  }
+  .footer__brand{ display:flex; flex-direction:column; align-items:center; gap:7px; text-align:center; }
+  .footer__logo img{ height:26px; }
+  .footer__developer{
+    max-width:none;
+    color:#8d929c;
+    font-family:'Sora', sans-serif;
+    font-size:.59rem;
+    font-style:italic;
+    line-height:1.45;
+    letter-spacing:.015em;
+    white-space:nowrap;
+  }
+  .footer__developer-name{
+    color:#3b7dfb;
+    text-shadow:0 0 8px rgba(59,125,251,.35);
+  }
+  .footer__meta{ display:flex; flex-direction:column; align-items:flex-start; gap:4px; }
+  .footer__links{ display:flex; align-items:center; gap:26px; flex-wrap:wrap; }
+  .footer__links a{ font-size:.88rem; color:var(--text-dim); transition:color .3s; }
+  .footer__links a:hover{ color:var(--text); }
+  .footer__social{ display:flex; align-items:center; gap:12px; }
+  .footer__copy{ font-size:.8rem; color:var(--text-faint); }
+
+  .wa-float{
+    position:fixed; bottom:22px; right:22px; z-index:90;
+    width:56px; height:56px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:#fff; color:#0a0a0a;
+    box-shadow:0 10px 30px -8px rgba(0,0,0,.5);
+    transition:transform .35s var(--ease);
+  }
+  .wa-float:hover{ transform:scale(1.08); }
+  .wa-float svg{ width:25px; height:25px; }
+  .wa-float__ring{
+    position:absolute; inset:-6px; border-radius:50%;
+    border:1.5px solid var(--gold); opacity:.5;
+    animation:ring 2.4s ease-out infinite;
+  }
+  @keyframes ring{
+    0%{ transform:scale(.9); opacity:.6; }
+    100%{ transform:scale(1.5); opacity:0; }
+  }
+
+  @media (max-width:480px){
+    .hero__content{ padding:120px 0 70px; }
+    .carousel__slide{ aspect-ratio:4/5; }
+    .carousel__caption h3{ font-size:1.05rem; }
+    .footer__developer{ font-size:.52rem; }
+    footer{ flex-direction:column; align-items:flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAVBAR ============ -->
+<nav class="nav" id="nav">
+  <a href="#top" class="nav__logo"><img src="img/navbar.png" alt="Dylan Detail"></a>
+
+  <ul class="nav__links" id="navLinks">
+    <div class="nav__links-inner">
+      <li><a href="#processo" data-i18n="nav.processo"></a></li>
+      <li><a href="#servicos" data-i18n="nav.servicos"></a></li>
+      <li><a href="#contato" data-i18n="nav.contato"></a></li>
+      <li class="nav__reviews-mobile"><a href="dashboard.html" data-i18n="nav.avaliacoes"></a></li>
+    </div>
+  </ul>
+
+  <div class="nav__right">
+    <a href="https://www.tiktok.com/@dylandtail" class="icon-btn" target="_blank" rel="noopener" aria-label="TikTok">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82c-.9-.88-1.44-2.1-1.44-3.44h-3.16v13.68a2.72 2.72 0 1 1-2.72-2.72c.27 0 .53.04.78.11V10.4a5.9 5.9 0 0 0-.78-.05A5.9 5.9 0 1 0 15.16 16.2V9.02a7.3 7.3 0 0 0 4.26 1.36V7.25a4.4 4.4 0 0 1-2.82-1.43z"/></svg>
+    </a>
+    <div class="lang-switch lang-switch--desktop"></div>
+    <div class="nav__cta">
+      <a href="dashboard.html" class="btn btn-ghost" data-i18n="nav.avaliacoes"></a>
+      <button class="nav__burger" id="burger" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="hero__bg"></div>
+  <div class="hero__content">
+    <h1 data-i18n-html="hero.title"></h1>
+    <p data-i18n="hero.desc"></p>
+  </div>
+</header>
+
+<!-- ============ TRABALHOS — agora só é o vídeo de fundo ============ -->
+<section id="trabalhos" class="section-media">
+  <video class="section-media__video" autoplay muted loop playsinline>
+    <source src="img/video1.mp4" type="video/mp4">
+  </video>
+  <div class="section-media__overlay"></div>
+</section>
+
+<!-- ============ PROCESSO / CAROUSEL ============ -->
+<section id="processo" class="section-media">
+  <div class="section-media__bg" style="background-image:url('img/bg-processo.jpg')"></div>
+  <div class="section-media__overlay"></div>
+  <div class="section-media__content">
+    <div class="section-head reveal">
+      <span class="eyebrow" data-i18n="processo.eyebrow"></span>
+      <h2 data-i18n="processo.title"></h2>
+      <p data-i18n="processo.desc"></p>
+    </div>
+
+    <div class="carousel reveal" id="processCarousel">
+      <div class="carousel__viewport">
+        <div class="carousel__track" id="processTrack"></div>
+      </div>
+      <div class="carousel__controls">
+        <div class="carousel__dots" id="processDots"></div>
+        <div class="carousel__arrows">
+          <button class="carousel__arrow glass" id="processPrev" aria-label="Anterior">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="carousel__arrow glass" id="processNext" aria-label="Próximo">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVIÇOS / CAROUSEL ============ -->
+<section id="servicos" class="section-media">
+  <div class="section-media__bg" style="background-image:url('img/bg-servicos.jpg')"></div>
+  <div class="section-media__overlay"></div>
+  <div class="section-media__content">
+    <div class="section-head reveal">
+      <span class="eyebrow" data-i18n="servicos.eyebrow"></span>
+      <h2 data-i18n="servicos.title"></h2>
+      <p data-i18n="servicos.desc"></p>
+    </div>
+
+    <div class="carousel reveal" id="servicesCarousel">
+      <div class="carousel__viewport">
+        <div class="carousel__track" id="servicesTrack"></div>
+      </div>
+      <div class="carousel__controls">
+        <div class="carousel__dots" id="servicesDots"></div>
+        <div class="carousel__arrows">
+          <button class="carousel__arrow glass" id="servicesPrev" aria-label="Anterior">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="carousel__arrow glass" id="servicesNext" aria-label="Próximo">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ POR QUE ESCOLHER ============ -->
+<section id="porque" class="section-media porque-section">
+
+  <style>
+    .porque-section {
+      position: relative;
+      min-height: 650px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      isolation: isolate;
+      background: #080808;
+    }
+
+    .porque-section__bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 1 !important;
+      z-index: -3;
+      filter: none;
+    }
+
+    .porque-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background: radial-gradient(ellipse at center,
+        transparent 25%,
+        rgba(0,0,0,.08) 48%,
+        rgba(0,0,0,.48) 82%,
+        rgba(0,0,0,.78) 100%);
+    }
+
+    .porque-section::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background: linear-gradient(90deg,
+        rgba(0,0,0,.72) 0%,
+        rgba(0,0,0,.48) 20%,
+        rgba(0,0,0,.18) 42%,
+        transparent 65%);
+      opacity: .9;
+    }
+
+    .porque-section__content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 90px 40px;
+      display: flex;
+      align-items: center;
+    }
+
+    .porque-section__text {
+      width: min(100%, 560px);
+      max-width: 560px;
+      position: relative;
+      animation: porqueTextIn 1.2s cubic-bezier(.16,1,.3,1) both;
+    }
+
+    .porque-section__text::before {
+      content: "";
+      display: block;
+      width: 55px;
+      height: 2px;
+      margin-bottom: 22px;
+      background: linear-gradient(90deg, #b88935, #f3d58a, #b88935);
+      box-shadow: 0 0 12px rgba(220,178,87,.35);
+      transform-origin: left;
+      animation: porqueLine 1s cubic-bezier(.16,1,.3,1) .2s both;
+    }
+
+    .porque-section__text .eyebrow {
+      display: inline-block;
+      color: #d7b765;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      text-shadow: 0 0 15px rgba(215,183,101,.18);
+      animation: porqueEyebrow 1s ease-out .25s both;
+    }
+
+    .porque-section__text h2 {
+      max-width: 500px;
+      margin-top: 10px;
+      margin-bottom: 24px;
+      color: #e5c477;
+      background: linear-gradient(110deg, #b88935 0%, #f3d58a 45%, #c69a48 70%, #f0d184 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 24px rgba(212,171,81,.12);
+      animation: porqueTitle 1.15s cubic-bezier(.16,1,.3,1) .3s both;
+    }
+
+    /* párrafos — vidrio cálido con luz blanca y marrón */
+    .porque-section__text p {
+      display: inline;
+      max-width: 100%;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-style: italic;
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 2.1;
+      letter-spacing: .01em;
+      color: #fffaf0;
+
+      background: linear-gradient(110deg,
+        rgba(255,255,255,.2) 0%,
+        rgba(255,255,255,.08) 20%,
+        rgba(181,132,55,.58) 58%,
+        rgba(111,76,31,.48) 100%);
+      border: 1px solid rgba(255,255,255,.28);
+      box-shadow: 0 8px 24px rgba(0,0,0,.2), 0 0 18px rgba(205,164,94,.16);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      padding: 3px 8px;
+      text-shadow: 0 1px 2px rgba(0,0,0,.5);
+
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+
+      animation: porqueParagraph 1s ease-out both;
+    }
+
+    .porque-section__text p:nth-of-type(1) {
+      animation-delay: .5s;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .porque-section__text p:nth-of-type(2) {
+      animation-delay: .68s;
+      display: block;
+    }
+
+    @keyframes porqueTextIn {
+      from { opacity: 0; transform: translateY(35px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes porqueLine {
+      from { opacity: 0; transform: scaleX(0); }
+      to   { opacity: 1; transform: scaleX(1); }
+    }
+    @keyframes porqueEyebrow {
+      from { opacity: 0; transform: translateX(-20px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes porqueTitle {
+      from { opacity: 0; transform: translateY(22px); filter: blur(7px); }
+      to   { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+    @keyframes porqueParagraph {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .porque-section { min-height: 600px; }
+      .porque-section__content { padding: 75px 25px; }
+      .porque-section__text { max-width: 100%; }
+      .porque-section__text h2 { max-width: 100%; }
+      .porque-section__text p { font-size: 14px; }
+      .porque-section::after {
+        background: linear-gradient(180deg, rgba(0,0,0,.2), rgba(0,0,0,.65));
+      }
+    }
+  </style>
+
+  <!-- IMAGEN -->
+  <div
+    class="section-media__bg porque-section__bg"
+    style="background-image:url('img/webbb.png')">
+  </div>
+
+  <!-- CONTENIDO -->
+  <div class="porque-section__content">
+    <div class="porque-section__text reveal">
+      <span class="eyebrow" data-i18n="porque.eyebrow"></span>
+      <h2 data-i18n="porque.title"></h2>
+      <p data-i18n="porque.p1"></p>
+      <p data-i18n="porque.p2"></p>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ============ CTA / CONTATO ============ -->
+<style>
+  #contato .section-media__bg{
+    opacity:.55;
+  }
+  #contato .section-media__overlay{
+    background:linear-gradient(180deg, var(--bg) 0%, rgba(8,9,11,.5) 14%, rgba(8,9,11,.5) 86%, var(--bg) 100%);
+  }
+  #contato .cta__inner h2{
+    font-style:italic;
+    animation: ctaBlueWhite 1.1s steps(1) infinite;
+  }
+  #contato .cta__inner h2 .chrome-text{
+    animation:none;
+    background:none;
+    -webkit-text-fill-color:currentColor;
+    color:inherit;
+  }
+  @keyframes ctaBlueWhite{
+    0%,100%{ color:var(--blue); text-shadow:0 0 18px rgba(59,125,251,.9), 0 0 40px rgba(59,125,251,.5); }
+    50%{ color:#fff; text-shadow:0 0 18px rgba(255,255,255,.9), 0 0 40px rgba(255,255,255,.5); }
+  }
+</style>
+
+
+<!-- ============ CTA / CONTATO ============ -->
+<style>
+  #contato .section-media__bg{
+    opacity:1;
+    background-size:cover;
+    background-position:top center;
+    background-repeat:no-repeat;
+  }
+  @media (max-width:780px){
+    #contato .section-media__bg{
+      background-size:auto 106%;
+      background-position:72% 58%;
+      background-repeat:no-repeat;
+    }
+    #contato{
+      min-height:90vh;
+      padding:72px 6vw;
+      align-items:flex-end;
+    }
+  }
+  #contato .section-media__overlay{
+    background:none;
+  }
+  #contato{
+    min-height:90vh;
+    display:flex;
+    align-items:flex-end;
+  }
+  #contato .cta__inner h2{
+    font-style:italic;
+    animation: ctaBlueWhite 1.1s steps(1) infinite;
+  }
+  #contato .cta__inner h2 .chrome-text{
+    animation:none;
+    background:none;
+    -webkit-text-fill-color:currentColor;
+    color:inherit;
+  }
+  #contato .cta__inner p{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    color:var(--gold-light);
+  }
+  @keyframes ctaBlueWhite{
+    0%,100%{ color:var(--blue); text-shadow:0 0 18px rgba(59,125,251,.9), 0 0 40px rgba(59,125,251,.5); }
+    50%{ color:#fff; text-shadow:0 0 18px rgba(247, 255, 100, 0.9), 0 0 40px rgba(255,255,255,.5); }
+  }
+</style>
+
+<section id="contato" class="cta section-media">
+  <div class="section-media__bg" style="background-image:url('img/fondovamos.png')"></div>
+  <div class="section-media__overlay"></div>
+  <div class="cta__blob"></div>
+  <div class="cta__inner section-media__content reveal">
+    <h2 data-i18n-html="cta.title"></h2>
+    <p data-i18n="cta.desc"></p>
+    <a href="https://wa.me/5547988555609" class="btn btn-primary" target="_blank" rel="noopener" data-i18n="cta.button"></a>
+  </div>
+</section>
+
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer__brand">
+    <a href="#top" class="footer__logo"><img src="img/navbar.png" alt="Dylan Detail"></a>
+  </div>
+  <div class="footer__social">
+    <a href="https://www.tiktok.com/@dylandtail" class="icon-btn" target="_blank" rel="noopener" aria-label="TikTok">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82c-.9-.88-1.44-2.1-1.44-3.44h-3.16v13.68a2.72 2.72 0 1 1-2.72-2.72c.27 0 .53.04.78.11V10.4a5.9 5.9 0 0 0-.78-.05A5.9 5.9 0 1 0 15.16 16.2V9.02a7.3 7.3 0 0 0 4.26 1.36V7.25a4.4 4.4 0 0 1-2.82-1.43z"/></svg>
+    </a>
+    <div class="footer__meta">
+      <span class="footer__copy" data-i18n="footer.copy"></span>
+      <span class="footer__developer" data-i18n-html="footer.developer"></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ WHATSAPP FLOAT ============ -->
+<a href="https://wa.me/5547988555609" class="wa-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <span class="wa-float__ring"></span>
+  <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.02 3C9.4 3 4 8.4 4 15.02c0 2.5.66 4.85 1.9 6.95L4 29l7.24-1.9a12.9 12.9 0 0 0 4.78.92h.01c6.62 0 12.02-5.4 12.02-12.02C28.05 8.4 22.65 3 16.02 3zm0 21.9h-.01a10 10 0 0 1-4.98-1.36l-.36-.21-3.7.97.99-3.6-.24-.37a9.86 9.86 0 0 1-1.52-5.3c0-5.48 4.46-9.94 9.83-9.94 5.36 0 9.83 4.46 9.83 9.94 0 5.48-4.47 9.87-9.84 9.87zm5.4-7.4c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.66.15-.2.3-.76.96-.93 1.15-.17.2-.34.22-.63.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.34.44-.5.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.66-1.58-.9-2.17-.24-.57-.48-.5-.66-.5h-.56c-.2 0-.5.07-.77.37-.27.3-1 .98-1 2.4 0 1.4 1.03 2.76 1.17 2.96.15.2 2.02 3.08 4.9 4.32.68.3 1.22.47 1.63.6.68.22 1.3.19 1.79.11.55-.08 1.75-.71 2-1.4.24-.68.24-1.27.17-1.4-.07-.13-.27-.2-.56-.35z"/></svg>
+</a>
+
+<script>
+(function(){
+  'use strict';
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var LANGS = [
+    { code:'es', flag:'🇦🇷', label:'Español' },
+    { code:'pt', flag:'🇧🇷', label:'Português' },
+    { code:'en', flag:'🇺🇸', label:'English' }
+  ];
+
+  var i18n = {
+    pt: {
+      'nav.trabalhos':'Trabalhos', 'nav.processo':'Processo', 'nav.servicos':'Serviços',
+      'nav.contato':'Contato', 'nav.avaliacoes':'Avaliações',
+      'hero.title':'Cada detalhe <span class="chrome-text">faz a diferença</span>',
+      'hero.desc':'Lavação técnica, correção de pintura e higienização premium. Cuidado detalhista para transformar o seu veículo em uma verdadeira obra de arte.',
+      'processo.eyebrow':'Como trabalho', 'processo.title':'Nosso processo',
+      'processo.desc':'Seis etapas técnicas, sempre na mesma ordem, para garantir o mesmo padrão em cada veículo.',
+      'process.1.title':'Limpeza interior ao detalhe', 'process.1.desc':'Aspiração profunda e remoção de detritos de frestas, painéis e estofados.',
+      'process.2.title':'Lavagem com espuma profissional', 'process.2.desc':'Pré-lavagem com espuma de pH neutro, sem riscos para a pintura.',
+      'process.3.title':'Aspiração completa', 'process.3.desc':'Bancos, tapetes e porta-malas — atenção a cada canto do veículo.',
+      'process.4.title':'Remoção de resíduos férricos', 'process.4.desc':'Descontaminação química da pintura e das rodas.',
+      'process.5.title':'Secagem técnica com cera', 'process.5.desc':'Secagem sem marcas, seguida de uma camada de proteção.',
+      'process.6.title':'Tratamento antibacteriano', 'process.6.desc':'Higienização do ar-condicionado e das superfícies internas.',
+      'servicos.eyebrow':'O que ofereço', 'servicos.title':'Serviços',
+      'servicos.desc':'Do cuidado de rotina à proteção de longo prazo, cada serviço é adaptado ao seu veículo.',
+      'service.1.title':'Polimento de farol com polímero líquido', 'service.1.desc':'Vaporização de polímero líquido que forma uma película cristalina sobre o farol, removendo a opacidade e devolvendo o brilho original com proteção UV.',
+      'service.2.title':'Higienização completa', 'service.2.desc':'Eliminação de odores, bactérias e sujeira profunda do interior do veículo.',
+      'service.3.title':'Correção de pintura', 'service.3.desc':'Polimento técnico que remove riscos superficiais e devolve o brilho original.',
+      'service.4.title':'Instalação de PPF', 'service.4.desc':'Película de proteção contra riscos, impactos de pedras e desgaste do dia a dia.',
+      'service.5.title':'Limpeza a vapor', 'service.5.desc':'Desinfecção profunda de superfícies e estofados sem excesso de químicos.',
+      'service.6.title':'Tapizados ao detalhe', 'service.6.desc':'Tratamento específico para estofados e tapetes, restaurando cor e textura.',
+      'porque.eyebrow':'Por que escolher', 'porque.title':'Experiência e cuidado em cada detalhe',
+      'porque.p1':'Ofereço um serviço de alta qualidade que vai além das expectativas, com um trabalho diferenciado e detalhista, adaptado às necessidades do seu veículo.',
+      'porque.p2':'Entre em contato para transformar o cuidado com o seu carro em uma experiência de excelência.',
+      'porque.quote':'"Seu carro merece o melhor cuidado — cada detalhe é tratado como se fosse o meu."',
+      'cta.title':'Vamos cuidar do <span class="chrome-text">seu veículo</span>?',
+      'cta.desc':'Fale comigo agora mesmo pelo WhatsApp e agende o seu horário.',
+      'cta.button':'Chamar no WhatsApp',
+      'footer.copy':'© 2026 Dylan Deris. Todos os direitos reservados.',
+      'footer.developer':'Desenvolvido por <span class="footer__developer-name">Mateo Deris</span> - Desenvolvedor de Software'
+    },
+    es: {
+      'nav.trabalhos':'Trabajos', 'nav.processo':'Proceso', 'nav.servicos':'Servicios',
+      'nav.contato':'Contacto', 'nav.avaliacoes':'Reseñas',
+      'hero.title':'Cada detalle <span class="chrome-text">hace la diferencia</span>',
+      'hero.desc':'Lavado técnico, corrección de pintura e higienización premium. Cuidado detallista para transformar tu vehículo en una verdadera obra de arte.',
+      'processo.eyebrow':'Cómo trabajo', 'processo.title':'Nuestro proceso',
+      'processo.desc':'Seis etapas técnicas, siempre en el mismo orden, para garantizar el mismo estándar en cada vehículo.',
+      'process.1.title':'Limpieza interior al detalle', 'process.1.desc':'Aspirado profundo y remoción de residuos de rendijas, paneles y tapizados.',
+      'process.2.title':'Lavado con espuma profesional', 'process.2.desc':'Prelavado con espuma de pH neutro, sin riesgos para la pintura.',
+      'process.3.title':'Aspirado completo', 'process.3.desc':'Asientos, alfombras y baúl — atención a cada rincón del vehículo.',
+      'process.4.title':'Remoción de residuos ferrosos', 'process.4.desc':'Descontaminación química de la pintura y las llantas.',
+      'process.5.title':'Secado técnico con cera', 'process.5.desc':'Secado sin marcas, seguido de una capa de protección.',
+      'process.6.title':'Tratamiento antibacteriano', 'process.6.desc':'Higienización del aire acondicionado y las superficies internas.',
+      'servicos.eyebrow':'Qué ofrezco', 'servicos.title':'Servicios',
+      'servicos.desc':'Del cuidado de rutina a la protección a largo plazo, cada servicio se adapta a tu vehículo.',
+      'service.1.title':'Pulido de faros con polímero líquido', 'service.1.desc':'Vaporización de polímero líquido que forma una película cristalina sobre el faro, eliminando la opacidad y devolviendo el brillo original con protección UV.',
+      'service.2.title':'Higienización completa', 'service.2.desc':'Eliminación de olores, bacterias y suciedad profunda del interior del vehículo.',
+      'service.3.title':'Corrección de pintura', 'service.3.desc':'Pulido técnico que elimina rayones superficiales y devuelve el brillo original.',
+      'service.4.title':'Instalación de PPF', 'service.4.desc':'Película de protección contra rayones, impactos de piedras y desgaste diario.',
+      'service.5.title':'Limpieza a vapor', 'service.5.desc':'Desinfección profunda de superficies y tapizados sin exceso de químicos.',
+      'service.6.title':'Tapizados al detalle', 'service.6.desc':'Tratamiento específico para tapizados y alfombras, restaurando color y textura.',
+      'porque.eyebrow':'Por qué elegirme', 'porque.title':'Experiencia y cuidado en cada detalle',
+      'porque.p1':'Ofrezco un servicio de alta calidad que va más allá de las expectativas, con un trabajo diferenciado y detallista, adaptado a las necesidades de tu vehículo.',
+      'porque.p2':'Contactame para transformar el cuidado de tu auto en una experiencia de excelencia.',
+      'porque.quote':'"Tu auto merece el mejor cuidado — cada detalle se trata como si fuera el mío."',
+      'cta.title':'¿Cuidamos tu <span class="chrome-text">auto</span>?',
+      'cta.desc':'Hablá conmigo ahora mismo por WhatsApp y agendá tu horario.',
+      'cta.button':'Hablar por WhatsApp',
+      'footer.copy':'© 2026 Dylan Deris. Todos los derechos reservados.',
+      'footer.developer':'Desarrollado por <span class="footer__developer-name">Mateo Deris</span> - Desarrollador de Software'
+    },
+    en: {
+      'nav.trabalhos':'Work', 'nav.processo':'Process', 'nav.servicos':'Services',
+      'nav.contato':'Contact', 'nav.avaliacoes':'Reviews',
+      'hero.title':'Every detail <span class="chrome-text">makes the difference</span>',
+      'hero.desc':'Technical wash, paint correction and premium sanitizing. Detail-driven care that turns your vehicle into a true work of art.',
+      'processo.eyebrow':'How I work', 'processo.title':'Our process',
+      'processo.desc':'Six technical stages, always in the same order, to guarantee the same standard on every vehicle.',
+      'process.1.title':'Detailed interior cleaning', 'process.1.desc':'Deep vacuuming and debris removal from gaps, panels and upholstery.',
+      'process.2.title':'Professional foam wash', 'process.2.desc':'Pre-wash with pH-neutral foam, safe for the paint.',
+      'process.3.title':'Full vacuuming', 'process.3.desc':'Seats, mats and trunk — attention to every corner of the vehicle.',
+      'process.4.title':'Ferrous contamination removal', 'process.4.desc':'Chemical decontamination of the paint and wheels.',
+      'process.5.title':'Technical drying with wax', 'process.5.desc':'Mark-free drying, followed by a protective layer.',
+      'process.6.title':'Antibacterial treatment', 'process.6.desc':"Sanitizing of the AC system and interior surfaces.",
+      'servicos.eyebrow':'What I offer', 'servicos.title':'Services',
+      'servicos.desc':'From routine care to long-term protection, every service is tailored to your vehicle.',
+      'service.1.title':'Headlight polishing with liquid polymer', 'service.1.desc':'Liquid polymer vapor treatment that forms a crystal-clear film over the headlight, removing haze and restoring the original shine with UV protection.',
+      'service.2.title':'Full sanitizing', 'service.2.desc':"Removal of odors, bacteria and deep dirt from the vehicle's interior.",
+      'service.3.title':'Paint correction', 'service.3.desc':'Technical polishing that removes surface scratches and restores the original shine.',
+      'service.4.title':'PPF installation', 'service.4.desc':'Protective film against scratches, stone chips and everyday wear.',
+      'service.5.title':'Steam cleaning', 'service.5.desc':'Deep disinfection of surfaces and upholstery without excess chemicals.',
+      'service.6.title':'Detailed upholstery', 'service.6.desc':"Specific treatment for upholstery and mats, restoring color and texture.",
+      'porque.eyebrow':'Why choose me', 'porque.title':'Experience and care in every detail',
+      'porque.p1':"I offer a high-quality service that goes beyond expectations, with detailed, tailored work adapted to your vehicle's needs.",
+      'porque.p2':'Get in touch to turn your car care into an experience of excellence.',
+      'porque.quote':'"Your car deserves the best care — every detail is treated as if it were my own."',
+      'cta.title':"Let's take care of your <span class=\"chrome-text\">car</span>?",
+      'cta.desc':'Message me right now on WhatsApp and book your slot.',
+      'cta.button':'Message on WhatsApp',
+      'footer.copy':'© 2026 Dylan Deris. All rights reserved.',
+      'footer.developer':'Developed by <span class="footer__developer-name">Mateo Deris</span> - Software Developer'
+    }
+  };
+
+  var htmlLangMap = { es:'es-AR', pt:'pt-BR', en:'en-US' };
+  var currentLang = localStorage.getItem('dd_lang') || 'pt';
+  if (!i18n[currentLang]) currentLang = 'pt';
+
+  function applyLang(lang){
+    currentLang = lang;
+    document.documentElement.lang = htmlLangMap[lang];
+    var dict = i18n[lang];
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if (dict[key] !== undefined) el.textContent = dict[key];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+      var key = el.getAttribute('data-i18n-html');
+      if (dict[key] !== undefined) el.innerHTML = dict[key];
+    });
+    document.querySelectorAll('.lang-btn').forEach(function(btn){
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+    localStorage.setItem('dd_lang', lang);
+  }
+
+  function buildLangSwitch(container){
+    LANGS.forEach(function(l){
+      var b = document.createElement('button');
+      b.className = 'lang-btn';
+      b.type = 'button';
+      b.dataset.lang = l.code;
+      b.setAttribute('aria-label', l.label);
+      b.textContent = l.flag;
+      b.addEventListener('click', function(){ applyLang(l.code); });
+      container.appendChild(b);
+    });
+  }
+  document.querySelectorAll('.lang-switch').forEach(buildLangSwitch);
+
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function(){
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive:true });
+
+  var burger = document.getElementById('burger');
+  var navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', function(){
+    var open = navLinks.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      navLinks.classList.remove('open');
+      burger.classList.remove('open');
+      burger.setAttribute('aria-expanded', false);
+    });
+  });
+
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold:.15 });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('in-view'); });
+  }
+
+  function createCarousel(opts){
+    var track = document.getElementById(opts.trackId);
+    var dotsWrap = document.getElementById(opts.dotsId);
+    var prevBtn = document.getElementById(opts.prevId);
+    var nextBtn = document.getElementById(opts.nextId);
+    var viewport = track.parentElement;
+    var items = opts.items;
+    var index = 0;
+    var autoplayMs = opts.autoplay || 0;
+    var timer = null;
+
+    items.forEach(function(item, i){
+      var slide = document.createElement('div');
+      slide.className = 'carousel__slide';
+
+      var img = document.createElement('img');
+      img.src = item.src;
+      img.alt = item.alt || (opts.altPrefix + ' ' + (i + 1));
+      img.loading = i === 0 ? 'eager' : 'lazy';
+      img.draggable = false;
+      slide.appendChild(img);
+
+      if (item.titleKey){
+        var caption = document.createElement('div');
+        caption.className = 'carousel__caption';
+        var num = document.createElement('span');
+        num.className = 'eyebrow';
+        num.textContent = (i + 1 < 10 ? '0' : '') + (i + 1);
+        var h3 = document.createElement('h3');
+        h3.setAttribute('data-i18n', item.titleKey);
+        var p = document.createElement('p');
+        p.setAttribute('data-i18n', item.descKey);
+        caption.appendChild(num);
+        caption.appendChild(h3);
+        caption.appendChild(p);
+        slide.appendChild(caption);
+      }
+
+      track.appendChild(slide);
+
+      var dot = document.createElement('button');
+      dot.className = 'carousel__dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+      dot.addEventListener('click', function(){ goTo(i); resetAutoplay(); });
+      dotsWrap.appendChild(dot);
+    });
+
+    var dots = dotsWrap.querySelectorAll('.carousel__dot');
+    var slideWidth = function(){ return track.children[0].getBoundingClientRect().width + (window.innerWidth > 780 ? 20 : 0); };
+
+    function update(){
+      track.style.transform = 'translateX(-' + (index * slideWidth()) + 'px)';
+      dots.forEach(function(d, i){ d.classList.toggle('active', i === index); });
+    }
+    function goTo(i){
+      index = (i + items.length) % items.length;
+      update();
+    }
+    function next(){ goTo(index + 1); }
+    function prev(){ goTo(index - 1); }
+
+    prevBtn.addEventListener('click', function(){ prev(); resetAutoplay(); });
+    nextBtn.addEventListener('click', function(){ next(); resetAutoplay(); });
+    window.addEventListener('resize', update);
+
+    function startAutoplay(){
+      if (!autoplayMs || reduceMotion) return;
+      timer = setInterval(next, autoplayMs);
+    }
+    function resetAutoplay(){
+      clearInterval(timer);
+      startAutoplay();
+    }
+    viewport.addEventListener('mouseenter', function(){ clearInterval(timer); });
+    viewport.addEventListener('mouseleave', startAutoplay);
+
+    var isDown = false, startX = 0, startIndex = 0, dragDelta = 0;
+    function pointerDown(x){
+      isDown = true; startX = x; startIndex = index; dragDelta = 0;
+      viewport.classList.add('dragging');
+      track.style.transition = 'none';
+      clearInterval(timer);
+    }
+    function pointerMove(x){
+      if (!isDown) return;
+      dragDelta = x - startX;
+      track.style.transform = 'translateX(' + (-(startIndex * slideWidth()) + dragDelta) + 'px)';
+    }
+    function pointerUp(){
+      if (!isDown) return;
+      isDown = false;
+      viewport.classList.remove('dragging');
+      track.style.transition = '';
+      if (Math.abs(dragDelta) > slideWidth() * 0.18){
+        dragDelta < 0 ? next() : prev();
+      } else {
+        update();
+      }
+      resetAutoplay();
+    }
+    viewport.addEventListener('mousedown', function(e){ pointerDown(e.clientX); });
+    window.addEventListener('mousemove', function(e){ pointerMove(e.clientX); });
+    window.addEventListener('mouseup', pointerUp);
+    viewport.addEventListener('touchstart', function(e){ pointerDown(e.touches[0].clientX); }, { passive:true });
+    viewport.addEventListener('touchmove', function(e){ pointerMove(e.touches[0].clientX); }, { passive:true });
+    viewport.addEventListener('touchend', pointerUp);
+
+    update();
+    startAutoplay();
+  }
+
+  createCarousel({
+    trackId:'processTrack', dotsId:'processDots', prevId:'processPrev', nextId:'processNext',
+    altPrefix:'Etapa do processo',
+    items:[
+      { src:'img/etapa1.png', titleKey:'process.1.title', descKey:'process.1.desc' },
+      { src:'img/etapa2.png', titleKey:'process.2.title', descKey:'process.2.desc' },
+      { src:'img/etapa3.png', titleKey:'process.3.title', descKey:'process.3.desc' },
+      { src:'img/etapa4.png', titleKey:'process.4.title', descKey:'process.4.desc' },
+      { src:'img/etapa5.png', titleKey:'process.5.title', descKey:'process.5.desc' },
+      { src:'img/etapa6.png', titleKey:'process.6.title', descKey:'process.6.desc' }
+    ]
+  });
+
+  createCarousel({
+    trackId:'servicesTrack', dotsId:'servicesDots', prevId:'servicesPrev', nextId:'servicesNext',
+    altPrefix:'Serviço',
+    items:[
+      { src:'img/servico-farol.png', titleKey:'service.1.title', descKey:'service.1.desc' },
+      { src:'img/servico-higienizacao..png', titleKey:'service.2.title', descKey:'service.2.desc' },
+      { src:'img/servico-pintura.png', titleKey:'service.3.title', descKey:'service.3.desc' },
+      { src:'img/servico-ppf.png', titleKey:'service.4.title', descKey:'service.4.desc' },
+      { src:'img/servico-vapor.png', titleKey:'service.5.title', descKey:'service.5.desc' },
+      { src:'img/servico-tapizados.png', titleKey:'service.6.title', descKey:'service.6.desc' }
+    ]
+  });
+
+  applyLang(currentLang);
+})();
+</script>
+</body>
+</html>
