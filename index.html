@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Dylan Detail</title>
 <meta name="description" content="Lavação técnica, correção de pintura e higienização premium para o seu veículo. Cada detalhe faz a diferença.">
 <link rel="icon" type="image/png" href="img/favicon.png">
@@ -46,6 +46,8 @@
     color:var(--text);
     font-family:'Manrope', sans-serif;
     line-height:1.6;
+    -webkit-text-size-adjust:100%;
+    text-size-adjust:100%;
     overflow-x:hidden;
     -webkit-font-smoothing:antialiased;
     width:100%;
@@ -344,6 +346,17 @@
     .hero{ min-height:78svh; }
   }
 
+  @supports (-webkit-touch-callout: none){
+    @media (max-width:780px){
+      .hero__bg{
+        background-image:
+          linear-gradient(180deg, rgba(8,9,11,.28) 0%, rgba(8,9,11,.48) 70%, rgba(8,9,11,.82) 94%, var(--bg) 100%),
+          url('img/fondohero.png');
+        background-size:auto 100%;
+      }
+    }
+  }
+
   .hero__content{ position:relative; z-index:2; max-width:800px; padding:140px 0 100px; }
   .hero h1{
     font-family:'Fraunces', serif;
@@ -374,6 +387,8 @@
     display:flex;
     transition:transform .6s var(--ease);
     will-change:transform;
+    backface-visibility:hidden;
+    -webkit-backface-visibility:hidden;
   }
   .carousel__slide{
     flex:0 0 100%;
@@ -400,6 +415,23 @@
     .carousel__slide{ flex-basis:64%; }
     .carousel__slide + .carousel__slide{ margin-left:20px; }
     .carousel__track{ gap:0; }
+  }
+
+  @media (max-width:780px){
+    #servicos .carousel__viewport{ border-radius:var(--radius-md); }
+    #servicos .carousel__slide{
+      aspect-ratio:4/5;
+      min-height:420px;
+    }
+    #servicos .carousel__slide img{ object-fit:contain; object-position:center; }
+    #servicos .carousel__caption{ padding:22px 20px 24px; }
+    #servicos .carousel__caption h3{ font-size:1.08rem; max-width:300px; }
+    #servicos .carousel__caption p{ font-size:.82rem; line-height:1.55; max-width:330px; }
+  }
+
+  @media (max-width:480px){
+    #servicos .carousel__slide{ aspect-ratio:3/4; min-height:0; }
+    #servicos .carousel__controls{ margin-top:20px; }
   }
 
   .carousel__controls{
@@ -492,7 +524,7 @@
   .footer__copy{ font-size:.8rem; color:var(--text-faint); }
 
   .wa-float{
-    position:fixed; bottom:22px; right:22px; z-index:90;
+    position:fixed; bottom:22px; left:22px; z-index:90;
     width:56px; height:56px; border-radius:50%;
     display:flex; align-items:center; justify-content:center;
     background:#fff; color:#0a0a0a;
@@ -1131,7 +1163,8 @@
       var img = document.createElement('img');
       img.src = item.src;
       img.alt = item.alt || (opts.altPrefix + ' ' + (i + 1));
-      img.loading = i === 0 ? 'eager' : 'lazy';
+      img.loading = 'eager';
+      img.decoding = 'async';
       img.draggable = false;
       slide.appendChild(img);
 
@@ -1164,7 +1197,7 @@
     var slideWidth = function(){ return track.children[0].getBoundingClientRect().width + (window.innerWidth > 780 ? 20 : 0); };
 
     function update(){
-      track.style.transform = 'translateX(-' + (index * slideWidth()) + 'px)';
+      track.style.transform = 'translate3d(-' + (index * slideWidth()) + 'px, 0, 0)';
       dots.forEach(function(d, i){ d.classList.toggle('active', i === index); });
     }
     function goTo(i){
@@ -1199,7 +1232,7 @@
     function pointerMove(x){
       if (!isDown) return;
       dragDelta = x - startX;
-      track.style.transform = 'translateX(' + (-(startIndex * slideWidth()) + dragDelta) + 'px)';
+      track.style.transform = 'translate3d(' + (-(startIndex * slideWidth()) + dragDelta) + 'px, 0, 0)';
     }
     function pointerUp(){
       if (!isDown) return;

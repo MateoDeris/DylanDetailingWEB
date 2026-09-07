@@ -424,7 +424,7 @@
     min-height:190px;
   }
   .carousel-card__stars{ color:var(--gold-light); font-size:1.05rem; letter-spacing:2px; }
-  .carousel-card__quote{ color:var(--text); font-size:clamp(.92rem,1.6vw,1.05rem); line-height:1.7; word-break:break-word; overflow-wrap:break-word; }
+  .carousel-card__quote{ color:var(--text); font-size:clamp(.92rem,1.6vw,1.05rem); line-height:1.7; word-break:break-word; overflow-wrap:anywhere; }
   .carousel-card__author{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding-top:14px; border-top:1px solid var(--panel-border); flex-wrap:wrap; }
   .carousel-card__name{ font-family:'Syne', sans-serif; font-weight:700; font-size:.92rem; word-break:break-word; }
   .carousel-card__verified, .carousel-card__newtag{ font-size:.72rem; color:var(--text-faint); display:flex; align-items:center; gap:5px; white-space:nowrap; }
@@ -444,9 +444,16 @@
   .carousel-arrow svg{ width:19px; height:19px; }
   @media (max-width:600px){
     .carousel{ gap:8px; }
-    .carousel-arrow{ width:34px; height:34px; }
+    .carousel-viewport{ width:100%; }
+    .carousel-arrow{
+      position:relative;
+      top:auto;
+      width:34px;
+      height:34px;
+      transform:none;
+    }
     .carousel-arrow svg{ width:15px; height:15px; }
-    .carousel-card{ padding:24px 18px; min-height:170px; }
+    .carousel-card{ padding:24px 22px; min-height:170px; }
   }
   @media (max-width:360px){
     .carousel-card{ padding:20px 14px; gap:12px; }
@@ -618,9 +625,6 @@
   </ul>
 
   <div class="nav__right">
-    <a href="https://www.tiktok.com/@dylandtail" class="icon-btn" target="_blank" rel="noopener" aria-label="TikTok">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82c-.9-.88-1.44-2.1-1.44-3.44h-3.16v13.68a2.72 2.72 0 1 1-2.72 2.72c.27 0 .53.04.78.11V10.4a5.9 5.9 0 0 0-.78-.05A5.9 5.9 0 1 0 15.16 16.2V9.02a7.3 7.3 0 0 0 4.26 1.36V7.25a4.4 4.4 0 0 1-2.82-1.43z"/></svg>
-    </a>
     <div class="lang-switch lang-switch--desktop"></div>
     <div class="nav__cta">
       <a href="index.html" class="btn btn-ghost" data-i18n="nav.voltarSite"></a>
@@ -739,9 +743,6 @@
     <li><a href="dashboard.html" class="active" data-i18n="nav.avaliacoes"></a></li>
   </ul>
   <div class="footer__social">
-    <a href="https://www.tiktok.com/@dylandtail" class="icon-btn" target="_blank" rel="noopener" aria-label="TikTok">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82c-.9-.88-1.44-2.1-1.44-3.44h-3.16v13.68a2.72 2.72 0 1 1-2.72-2.72c.27 0 .53.04.78.11V10.4a5.9 5.9 0 0 0-.78-.05A5.9 5.9 0 1 0 15.16 16.2V9.02a7.3 7.3 0 0 0 4.26 1.36V7.25a4.4 4.4 0 0 1-2.82-1.43z"/></svg>
-    </a>
     <div class="footer__meta">
       <span class="footer__copy" data-i18n="footer.copy"></span>
       <span class="footer__developer" data-i18n-html="footer.developer"></span>
@@ -1093,7 +1094,7 @@
   function measure(){
     st.slideWidth = viewport.clientWidth;
     var durationPerSlide = 14; // segundos por cartão
-    st.speed = reducedMotion ? 0 : (st.slideWidth / durationPerSlide);
+    st.speed = reducedMotion || window.innerWidth <= 600 ? 0 : (st.slideWidth / durationPerSlide);
     var slides = track.children;
     for (var i=0;i<slides.length;i++){ slides[i].style.width = st.slideWidth + 'px'; }
     track.style.width = (st.slideWidth * st.list.length * 2) + 'px';
@@ -1178,6 +1179,14 @@
   function smoothJump(delta){
     if (st.jumping || st.slideWidth <= 0) return;
     st.jumping = true;
+    if (window.innerWidth <= 600){
+      st.pos = wrapPos(st.pos + delta);
+      track.style.transition = 'none';
+      applyTransform();
+      updateDots();
+      st.jumping = false;
+      return;
+    }
     track.style.transition = 'transform .5s cubic-bezier(.16,.84,.44,1)';
     st.pos = wrapPos(st.pos + delta);
     applyTransform();
@@ -1213,6 +1222,13 @@
     if (!st.dragging) return;
     st.dragging = false;
     track.classList.remove('dragging');
+    if (window.innerWidth <= 600 && st.slideWidth > 0){
+      st.pos = wrapPos(Math.round(st.pos / st.slideWidth) * st.slideWidth);
+      track.style.transition = 'transform .35s cubic-bezier(.16,.84,.44,1)';
+      applyTransform();
+      updateDots();
+      setTimeout(function(){ track.style.transition = 'none'; }, 380);
+    }
   }
   track.addEventListener('pointerup', endDrag);
   track.addEventListener('pointercancel', endDrag);
